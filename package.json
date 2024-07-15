@@ -1,13 +1,13 @@
 {
   "name": "automata-user-management",
-  "version": "0.0.15",
+  "version": "0.0.17",
   "description": "user management, authentication, and authorization for automata",
   "main": "dist/index.bundle.js",
   "files": [
     "./dist/index.bundle.js"
   ],
   "scripts": {
-    "test": "AUTOMATA_SQLITE_FILE=:memory: jest",
+    "test": "jest",
     "lint": "eslint .",
     "build": "webpack",
     "prepack": "npm run build"
