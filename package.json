@@ -1,6 +1,6 @@
 {
   "name": "automata-user-management",
-  "version": "0.0.20",
+  "version": "0.0.22",
   "description": "user management, authentication, and authorization for automata",
   "main": "dist/index.bundle.js",
   "files": [

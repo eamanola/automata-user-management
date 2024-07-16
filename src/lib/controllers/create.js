@@ -1,15 +1,13 @@
-const bcrypt = require('bcrypt');
 const { setUnverified } = require('automata-email-verification');
 const { utils, errors } = require('automata-utils');
 
 const { emailTakenError } = require('../errors');
 const signupSchema = require('../validators/signup');
 const { findOne, insertOne } = require('../model');
+const hashPassword = require('../utils/hash-password');
 
 const { logger } = utils;
 const { createParamError } = errors;
-
-const saltRounds = 11;
 
 const isEmailTaken = ({ email }) => findOne({ email });
 
@@ -25,7 +23,7 @@ const signup = async ({ email, password }) => {
     throw emailTakenError;
   }
 
-  const passwordHash = await bcrypt.hash(password, saltRounds);
+  const passwordHash = await hashPassword(password);
 
   await insertOne({ email, passwordHash });
 

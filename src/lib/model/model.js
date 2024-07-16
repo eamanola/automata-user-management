@@ -5,7 +5,7 @@ const {
 
 const { NODE_ENV } = require('../../config');
 
-const userSchema = require('../validators/user');
+const { passwordHashSchema, userSchema } = require('../validators/user');
 
 const table = require('./table');
 
@@ -22,6 +22,11 @@ module.exports = {
     await insertOne(table.name, user);
 
     return { id: user.id };
+  },
+  updatePasswordHash: async (where, passwordHash) => {
+    await passwordHashSchema.validate(passwordHash);
+
+    return updateOne(table.name, where, { passwordHash });
   },
 };
 

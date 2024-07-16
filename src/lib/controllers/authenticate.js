@@ -1,4 +1,3 @@
-const bcrypt = require('bcrypt');
 const { isVerified } = require('automata-email-verification');
 const { utils, errors } = require('automata-utils');
 
@@ -7,6 +6,7 @@ const { SECRET } = require('../../config');
 const { findOne } = require('../model');
 const { getSession } = require('./session');
 const loginSchema = require('../validators/login');
+const comparePassword = require('../utils/compare-password');
 
 const { logger, token: loginToken } = utils;
 const { encode } = loginToken;
@@ -34,7 +34,7 @@ const login = async (
     throw emailNotVerifiedError;
   }
 
-  if (!await bcrypt.compare(password, user.passwordHash)) {
+  if (!await comparePassword(password, user.passwordHash)) {
     throw invalidPasswordError;
   }
 

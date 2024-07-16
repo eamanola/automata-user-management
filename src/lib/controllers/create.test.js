@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const comparePassword = require('../utils/compare-password');
 
 const {
   countUsers, deleteUsers, findUser, isEmailVerified,
@@ -56,7 +56,7 @@ describe('signup', () => {
 
     expect(user.password).toBe(undefined);
     expect(password).not.toBe(user.passwordHash);
-    expect(await bcrypt.compare(password, user.passwordHash)).toBe(true);
+    expect(await comparePassword(password, user.passwordHash)).toBe(true);
   });
 
   it('should set email unverified', async () => {
