@@ -1,6 +1,6 @@
 {
   "name": "automata-user-management",
-  "version": "0.0.17",
+  "version": "0.0.18",
   "description": "user management, authentication, and authorization for automata",
   "main": "dist/index.bundle.js",
   "files": [
@@ -43,8 +43,8 @@
     "webpack-node-externals": "^3.0.0"
   },
   "dependencies": {
-    "automata-db": "^0.0.6",
-    "automata-email-verification": "^0.0.5",
+    "automata-db": "^0.0.10",
+    "automata-email-verification": "^0.0.9",
     "automata-utils": "^0.0.6",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
