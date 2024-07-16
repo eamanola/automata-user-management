@@ -14,7 +14,7 @@ describe('authorize', () => {
     const email = 'foo@example.com';
     const password = '123';
 
-    const { token } = await getToken({ email, password });
+    const token = await getToken({ email, password });
     const user = await authorize(token);
 
     expect(user).toEqual(expect.objectContaining({ email }));
@@ -24,7 +24,7 @@ describe('authorize', () => {
     const email = 'foo@example.com';
     const password = '123';
 
-    const { token } = await getToken({ email, password });
+    const token = await getToken({ email, password });
     const user = await authorize(token);
 
     expect(user).toEqual(expect.objectContaining({ email }));
@@ -58,7 +58,7 @@ describe('authorize', () => {
     const email = 'foo@example.com';
     const password = '123';
 
-    const { token } = await getToken({ email, password });
+    const token = await getToken({ email, password });
 
     await updateUser({ email }, { passwordHash: 'a new hash' });
 
@@ -75,7 +75,7 @@ describe('authorize', () => {
     const email = 'foo@example.com';
     const password = '123';
 
-    const { token } = await getToken({ email, password });
+    const token = await getToken({ email, password });
 
     await updateUser({ email }, { email: 'bar@example.com' });
 

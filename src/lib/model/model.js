@@ -23,10 +23,9 @@ module.exports = {
 
     return { id: user.id };
   },
-  updateOne: async (where, updates) => updateOne(table.name, where, updates),
 };
 
 if (NODE_ENV === 'test') {
-  module.exports.createTable = createUsersTable;
   module.exports.tableName = table.name;
+  module.exports.updateOne = async (where, updates) => updateOne(table.name, where, updates);
 }

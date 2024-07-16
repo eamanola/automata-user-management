@@ -10,7 +10,7 @@ describe('authorization', () => {
     const email = 'foo@example.bar';
     const password = 'foo';
 
-    const { token } = await getToken({ email, password });
+    const token = await getToken({ email, password });
 
     const req = { get: (/* authorization */) => `bearer ${token}` };
     const res = {};
