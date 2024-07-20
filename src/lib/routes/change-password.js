@@ -7,8 +7,8 @@ const changePassword = async (req, res, next) => {
   const { newPassword } = body;
 
   try {
-    const { token } = await controller(user, newPassword);
-    res.status(200).json({ message: 'OK', token });
+    await controller(user, newPassword);
+    res.status(200).json({ message: 'OK' });
   } catch (err) {
     error = err;
   }

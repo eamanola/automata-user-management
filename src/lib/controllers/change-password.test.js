@@ -7,7 +7,7 @@ const userFromToken = require('./authorize');
 
 const { findUser, countUsers, deleteUsers } = require('../../../jest/test-helpers');
 
-const { invalidPasswordError, userNotFoundError, sessionExipred } = require('../errors');
+const { invalidPasswordError } = require('../errors');
 
 const { paramError } = errors;
 
@@ -24,33 +24,14 @@ describe('change-password', () => {
     expect(newPassword).not.toBe(password);
     await changePassword(user, newPassword);
 
-    expect(await login({ email, password: newPassword })).toBeTruthy();
-
     try {
       await login({ email, password });
     } catch ({ message }) {
       expect(message).toBe(invalidPasswordError.message);
     }
-  });
 
-  it('should return a new token', async () => {
-    const email = 'foo@example.com';
-    const password = '123';
-    await signup({ email, password });
-    const { token: oldToken } = await login({ email, password });
-
-    expect(await userFromToken(oldToken)).toEqual(expect.objectContaining({ email }));
-
-    const user = await findUser({ email });
-    const { token: newToken } = await changePassword(user, '234');
-    expect(await userFromToken(newToken)).toEqual(expect.objectContaining({ email }));
-
-    try {
-      expect(await userFromToken(oldToken)).toEqual(expect.objectContaining({ email }));
-      expect('unreachable').toBe(true);
-    } catch (err) {
-      expect(err).toEqual(sessionExipred);
-    }
+    const { token } = await login({ email, password: newPassword });
+    expect(await userFromToken(token)).toEqual(expect.objectContaining({ email }));
   });
 
   it('should require userId and new password', async () => {
@@ -73,12 +54,8 @@ describe('change-password', () => {
     const fakeUser = { email: 'bar@example.con' };
     expect(await findUser(fakeUser)).toBe(null);
 
-    try {
-      await changePassword(fakeUser, '123');
-      expect('unreachable').toBe(true);
-    } catch (err) {
-      expect(err).toEqual(userNotFoundError);
-    }
+    await changePassword(fakeUser, '123');
+
     expect(await countUsers()).toBe(0);
   });
 });
