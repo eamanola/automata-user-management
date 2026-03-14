@@ -1,6 +1,6 @@
 {
   "name": "automata-user-management",
-  "version": "0.0.26",
+  "version": "0.0.27",
   "description": "user management, authentication, and authorization for automata",
   "main": "dist/index.bundle.js",
   "files": [
@@ -10,7 +10,8 @@
     "test": "jest",
     "lint": "eslint .",
     "build": "webpack",
-    "prepack": "npm run build"
+    "prepack": "npm run build",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
