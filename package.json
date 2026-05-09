@@ -1,7 +1,8 @@
 {
   "name": "automata-user-management",
-  "version": "0.0.32",
+  "version": "0.0.33",
   "description": "user management, authentication, and authorization for automata",
+  "type": "commonjs",
   "main": "dist/index.bundle.js",
   "files": [
     "./dist/index.bundle.js"
@@ -35,7 +36,7 @@
     "@eslint/js": "^10.0.1",
     "babel-loader": "^10.1.1",
     "bump-pkg-json": "^0.1.3",
-    "eslint": "^9.7.0",
+    "eslint": "^10.3.0",
     "eslint-plugin-import-x": "^4.16.2",
     "eslint-stylistic-airbnb": "^3.1.0",
     "globals": "^17.6.0",
