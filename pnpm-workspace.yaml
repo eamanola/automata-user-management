@@ -1,0 +1,9 @@
+allowBuilds:
+  automata-db: true
+  automata-email-verification: true
+  automata-utils: true
+  bcrypt: true
+  better-sqlite3: true
+  unrs-resolver: true
+
+blockExoticSubdeps: false
