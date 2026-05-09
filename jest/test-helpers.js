@@ -1,5 +1,6 @@
 const { deleteAll, count } = require('automata-db');
 const { isVerified, setUnverified, setVerified } = require('automata-email-verification');
+
 const { tableName, findOne, updateOne } = require('../src/lib/model');
 const { create: signup, authenticate: login } = require('../src/lib/controllers');
 

@@ -1,12 +1,11 @@
 const { randomUUID } = require('node:crypto');
+
 const {
   createTable, findOne, insertOne, updateOne,
 } = require('automata-db');
 
 const { NODE_ENV } = require('../../config');
-
 const { passwordHashSchema, userSchema } = require('../validators/user');
-
 const table = require('./table');
 
 // name to avoid dublicates

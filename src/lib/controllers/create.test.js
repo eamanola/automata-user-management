@@ -1,11 +1,8 @@
 const comparePassword = require('../utils/compare-password');
-
 const {
   countUsers, deleteUsers, findUser, isEmailVerified,
 } = require('../../../jest/test-helpers');
-
 const { authenticate: login } = require('.');
-
 const create = require('./create');
 
 describe('signup', () => {

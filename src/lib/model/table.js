@@ -9,8 +9,16 @@ const columns = [
 ];
 
 const indexes = [
-  { columns: ['id'], name: 'idx-Users-id', unique: true },
-  { columns: ['email'], name: 'idx-Users-email', unique: true },
+  {
+    columns: ['id'],
+    name: 'idx-Users-id',
+    unique: true,
+  },
+  {
+    columns: ['email'],
+    name: 'idx-Users-email',
+    unique: true,
+  },
 ];
 
 const name = 'Users';

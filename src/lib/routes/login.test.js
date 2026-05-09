@@ -3,11 +3,8 @@ const supertest = require('supertest');
 const { errors } = require('automata-utils');
 
 const { deleteUsers, setEmailStatus } = require('../../../jest/test-helpers');
-
 const { create: signup, authorize: userFromToken } = require('../controllers');
-
 const userErrors = require('../errors');
-
 const router = require('../router');
 
 const app = express();

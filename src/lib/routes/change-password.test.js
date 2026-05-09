@@ -3,12 +3,10 @@ const supertest = require('supertest');
 const { errors } = require('automata-utils');
 
 const { deleteUsers, getToken } = require('../../../jest/test-helpers');
-
 const { invalidPasswordError } = require('../errors');
+const router = require('../router');
 
 const { accessDenied, paramError } = errors;
-
-const router = require('../router');
 
 const app = express();
 app.use(express.json());

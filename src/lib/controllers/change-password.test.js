@@ -4,9 +4,7 @@ const changePassword = require('./change-password');
 const signup = require('./create');
 const login = require('./authenticate');
 const userFromToken = require('./authorize');
-
 const { findUser, countUsers, deleteUsers } = require('../../../jest/test-helpers');
-
 const { invalidPasswordError } = require('../errors');
 
 const { paramError } = errors;

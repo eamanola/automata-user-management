@@ -1,6 +1,6 @@
 const { errors } = require('automata-utils');
-const { deleteUsers, getToken } = require('../../../jest/test-helpers');
 
+const { deleteUsers, getToken } = require('../../../jest/test-helpers');
 const authorization = require('./authorization');
 
 describe('authorization', () => {

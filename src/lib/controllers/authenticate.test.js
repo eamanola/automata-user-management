@@ -4,9 +4,7 @@ const {
   isEmailVerified,
   setEmailStatus,
 } = require('../../../jest/test-helpers');
-
 const { create: signup, authorize: userFromToken } = require('.');
-
 const authenticate = require('./authenticate');
 
 describe('authenticate', () => {

@@ -4,7 +4,6 @@ const {
   deleteUsers, findUser, updateUser, getToken,
 } = require('../../../jest/test-helpers');
 const userErrors = require('../errors');
-
 const authorize = require('./authorize');
 
 describe('authorize', () => {
