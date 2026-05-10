@@ -1,5 +1,3 @@
-const { connectDB, closeDB } = require('automata-db');
-
 const { createUser, deleteAll, isVerified } = require('../../../jest/test-helpers');
 const { request } = require('..');
 const emailVerificationErrors = require('../../errors');
@@ -8,17 +6,12 @@ const { findOne, init: initModel } = require('../../model');
 
 jest.mock('../../utils/send-email-verification-mail');
 
-let client;
-
 describe('email verification', () => {
   beforeAll(async () => {
-    client = await connectDB();
-    await initModel(client);
+    await initModel(global.client);
   });
 
-  afterAll(async () => closeDB(client));
-
-  afterEach(() => deleteAll(client));
+  afterEach(() => deleteAll(global.client));
 
   describe('verify by code', () => {
     it('should set email verified', async () => {

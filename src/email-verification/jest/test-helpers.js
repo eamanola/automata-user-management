@@ -10,7 +10,7 @@ const createUser = async ({ email = 'foo@example.com' } = {}) => {
 
 module.exports = {
   createUser,
-  deleteAll: (client) => deleteAll(client, tableName),
+  deleteAll: (db) => deleteAll(db, tableName),
   isVerified,
   setUnverified,
   setVerified,

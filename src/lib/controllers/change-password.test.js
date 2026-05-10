@@ -1,5 +1,4 @@
 const { errors } = require('automata-utils');
-const { connectDB, closeDB } = require('automata-db');
 
 const router = require('../router');
 const changePassword = require('./change-password');
@@ -15,13 +14,9 @@ let db;
 
 describe('change-password', () => {
   beforeAll(async () => {
-    db = await connectDB(':memory:');
+    db = global.client;
 
     router({ db });
-  });
-
-  afterAll(async () => {
-    closeDB(db);
   });
 
   afterEach(async () => deleteUsers(db));

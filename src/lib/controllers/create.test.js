@@ -1,5 +1,3 @@
-const { connectDB, closeDB } = require('automata-db');
-
 const router = require('../router');
 const comparePassword = require('../utils/compare-password');
 const {
@@ -12,15 +10,10 @@ let db;
 
 describe('signup', () => {
   beforeAll(async () => {
-    db = await connectDB(':memory:');
+    db = global.client;
 
     router({ db });
   });
-
-  afterAll(async () => {
-    closeDB(db);
-  });
-
   afterEach(async () => deleteUsers(db));
 
   it('should create a user', async () => {

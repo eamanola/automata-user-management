@@ -1,6 +1,5 @@
 const express = require('express');
 const supertest = require('supertest');
-const { connectDB, closeDB } = require('automata-db');
 
 const { createUser, deleteAll, isVerified } = require('../../../jest/test-helpers');
 const { findOne } = require('../../model');
@@ -9,11 +8,11 @@ const router = require('../../router');
 const email = 'foo@example.com';
 
 let api;
-let client;
+let db;
 
 describe('by-code', () => {
   beforeAll(async () => {
-    client = await connectDB();
+    db = global.client;
 
     const app = express();
 
@@ -21,16 +20,12 @@ describe('by-code', () => {
 
     app.use((req, res, next) => { req.user = { email }; next(); });
 
-    app.use('/email-verification', router({ db: client }));
+    app.use('/email-verification', router({ db }));
 
     api = supertest(app);
   });
 
-  afterAll(async () => {
-    await closeDB(client);
-  });
-
-  afterEach(() => deleteAll(client));
+  afterEach(() => deleteAll(db));
 
   it('should verify email', async () => {
     await createUser({ email });

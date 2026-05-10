@@ -1,7 +1,6 @@
 const express = require('express');
 const supertest = require('supertest');
 const { errors } = require('automata-utils');
-const { connectDB, closeDB } = require('automata-db');
 
 const { deleteUsers, setEmailStatus } = require('../../../jest/test-helpers');
 const { create: signup, authorize: userFromToken } = require('../controllers');
@@ -13,16 +12,12 @@ let api;
 
 describe('/login', () => {
   beforeAll(async () => {
-    db = await connectDB(':memory:');
+    db = global.client;
 
     const app = express();
     app.use(express.json());
     app.use(router({ db }));
     api = supertest(app);
-  });
-
-  afterAll(async () => {
-    closeDB(db);
   });
 
   afterEach(async () => deleteUsers(db));

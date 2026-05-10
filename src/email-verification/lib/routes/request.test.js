@@ -1,6 +1,5 @@
 const express = require('express');
 const supertest = require('supertest');
-const { connectDB, closeDB } = require('automata-db');
 
 const { createUser, deleteAll } = require('../../jest/test-helpers');
 const sendEmailVerificationMail = require('../utils/send-email-verification-mail');
@@ -10,24 +9,23 @@ const router = require('../router');
 jest.mock('../utils/send-email-verification-mail');
 
 let api;
-let client;
+let db;
 
 describe('request verification', () => {
   beforeAll(async () => {
-    client = await connectDB();
+    db = global.client;
 
     const app = express();
 
     app.use(express.json());
 
-    app.use('/email-verification', router({ db: client }));
+    app.use('/email-verification', router({ db }));
 
     api = supertest(app);
   });
 
   afterAll(async () => {
-    await deleteAll(client);
-    await closeDB(client);
+    await deleteAll(db);
   });
 
   it('should send verification mail', async () => {

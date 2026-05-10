@@ -1,5 +1,3 @@
-const { connectDB, closeDB } = require('automata-db');
-
 const router = require('../router');
 const {
   countUsers,
@@ -14,13 +12,9 @@ let db;
 
 describe('authenticate', () => {
   beforeAll(async () => {
-    db = await connectDB(':memory:');
+    db = global.client;
 
     router({ db });
-  });
-
-  afterAll(async () => {
-    closeDB(db);
   });
 
   afterEach(async () => deleteUsers(db));
