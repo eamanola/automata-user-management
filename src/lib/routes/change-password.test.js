@@ -1,6 +1,8 @@
 const express = require('express');
 const supertest = require('supertest');
 const { errors } = require('automata-utils');
+const { connectDB, closeDB } = require('automata-db');
+const { router: emailVerificationRouter } = require('automata-email-verification');
 
 const { deleteUsers, getToken } = require('../../../jest/test-helpers');
 const { invalidPasswordError } = require('../errors');
@@ -8,13 +10,26 @@ const router = require('../router');
 
 const { accessDenied, paramError } = errors;
 
-const app = express();
-app.use(express.json());
-app.use(router);
-const api = supertest(app);
+let db;
+let api;
 
 describe('PUT /password', () => {
-  afterEach(deleteUsers);
+  beforeAll(async () => {
+    db = await connectDB(':memory:');
+
+    emailVerificationRouter({ db });
+
+    const app = express();
+    app.use(express.json());
+    app.use(router({ db }));
+    api = supertest(app);
+  });
+
+  afterAll(async () => {
+    closeDB(db);
+  });
+
+  afterEach(async () => deleteUsers(db));
 
   it('should return 200 OK, and change password', async () => {
     const credentials = { email: 'foo@example.com', password: '123' };

@@ -1,3 +1,7 @@
+const { connectDB, closeDB } = require('automata-db');
+const { router: emailVerificationRouter } = require('automata-email-verification');
+
+const { init: initModel } = require('../model');
 const comparePassword = require('../utils/compare-password');
 const {
   countUsers, deleteUsers, findUser, isEmailVerified,
@@ -5,14 +9,28 @@ const {
 const { authenticate: login } = require('.');
 const create = require('./create');
 
+let db;
+
 describe('signup', () => {
-  afterEach(deleteUsers);
+  beforeAll(async () => {
+    db = await connectDB(':memory:');
+
+    emailVerificationRouter({ db });
+
+    initModel(db);
+  });
+
+  afterAll(async () => {
+    closeDB(db);
+  });
+
+  afterEach(async () => deleteUsers(db));
 
   it('should create a user', async () => {
     const email = 'foo@example.com';
     const password = '123';
 
-    expect(await countUsers()).toBe(0);
+    expect(await countUsers(db)).toBe(0);
 
     try {
       await login({ email, password });
@@ -23,7 +41,7 @@ describe('signup', () => {
 
     await create({ email, password });
 
-    expect(await countUsers()).toBe(1);
+    expect(await countUsers(db)).toBe(1);
     expect(await login({ email, password })).toBeTruthy();
   });
 
@@ -31,7 +49,7 @@ describe('signup', () => {
     const email = 'foo@example.com';
     await create({ email, password: '123' });
 
-    expect(await countUsers()).toBe(1);
+    expect(await countUsers(db)).toBe(1);
 
     try {
       await create({ email, password: '123' });
@@ -40,7 +58,7 @@ describe('signup', () => {
       expect(/Email already in use/u.test(message)).toBe(true);
     }
 
-    expect(await countUsers()).toBe(1);
+    expect(await countUsers(db)).toBe(1);
   });
 
   it('should hash password', async () => {

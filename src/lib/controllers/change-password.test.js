@@ -1,5 +1,8 @@
 const { errors } = require('automata-utils');
+const { connectDB, closeDB } = require('automata-db');
+const { router: emailVerificationRouter } = require('automata-email-verification');
 
+const { init: initModel } = require('../model');
 const changePassword = require('./change-password');
 const signup = require('./create');
 const login = require('./authenticate');
@@ -9,8 +12,22 @@ const { invalidPasswordError } = require('../errors');
 
 const { paramError } = errors;
 
+let db;
+
 describe('change-password', () => {
-  afterEach(deleteUsers);
+  beforeAll(async () => {
+    db = await connectDB(':memory:');
+
+    emailVerificationRouter({ db });
+
+    initModel(db);
+  });
+
+  afterAll(async () => {
+    closeDB(db);
+  });
+
+  afterEach(async () => deleteUsers(db));
 
   it('should update a password', async () => {
     const email = 'foo@example.com';
@@ -54,6 +71,6 @@ describe('change-password', () => {
 
     await changePassword(fakeUser, '123');
 
-    expect(await countUsers()).toBe(0);
+    expect(await countUsers(db)).toBe(0);
   });
 });

@@ -1,3 +1,7 @@
+const { connectDB, closeDB } = require('automata-db');
+const { router: emailVerificationRouter } = require('automata-email-verification');
+
+const { init: initModel } = require('../model');
 const {
   countUsers,
   deleteUsers,
@@ -7,8 +11,22 @@ const {
 const { create: signup, authorize: userFromToken } = require('.');
 const authenticate = require('./authenticate');
 
+let db;
+
 describe('authenticate', () => {
-  afterEach(deleteUsers);
+  beforeAll(async () => {
+    db = await connectDB(':memory:');
+
+    emailVerificationRouter({ db });
+
+    initModel(db);
+  });
+
+  afterAll(async () => {
+    closeDB(db);
+  });
+
+  afterEach(async () => deleteUsers(db));
 
   it('should return a token', async () => {
     const email = 'foo@example.com';
@@ -40,7 +58,7 @@ describe('authenticate', () => {
     const email = 'foo@example.com';
     const password = '123';
 
-    expect(await countUsers({ email })).toBe(0);
+    expect(await countUsers(db, { email })).toBe(0);
 
     try {
       await authenticate({ email, password });

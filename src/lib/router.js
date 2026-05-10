@@ -4,19 +4,26 @@ const { middlewares } = require('automata-utils');
 const userErrors = require('./errors');
 const { login, signup, changePassword } = require('./routes');
 const { authorization } = require('./middlewares');
+const { init: initModel } = require('./model');
 
 const { errorHandler, requireUser } = middlewares;
 
-const router = express.Router();
+const router = ({ db }) => {
+  initModel(db);
 
-router.post('/signup', signup);
+  const expressRouter = express.Router();
 
-router.post('/login', login);
+  expressRouter.post('/signup', signup);
 
-router.use(authorization);
+  expressRouter.post('/login', login);
 
-router.put('/password', requireUser, changePassword);
+  expressRouter.use(authorization);
 
-router.use(errorHandler(userErrors, { defaultTo500: false }));
+  expressRouter.put('/password', requireUser, changePassword);
+
+  expressRouter.use(errorHandler(userErrors, { defaultTo500: false }));
+
+  return expressRouter;
+};
 
 module.exports = router;

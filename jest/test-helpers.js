@@ -4,11 +4,11 @@ const { isVerified, setUnverified, setVerified } = require('automata-email-verif
 const { tableName, findOne, updateOne } = require('../src/lib/model');
 const { create: signup, authenticate: login } = require('../src/lib/controllers');
 
-const countUsers = (where) => count(tableName, where);
+const countUsers = (db, where) => count(db, tableName, where);
 
 const findUser = async (where) => findOne(where);
 
-const deleteUsers = () => deleteAll(tableName);
+const deleteUsers = (db) => deleteAll(db, tableName);
 
 const updateUser = async (where, updates) => updateOne(where, updates);
 

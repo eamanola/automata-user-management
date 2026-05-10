@@ -10,10 +10,10 @@ importers:
     dependencies:
       automata-db:
         specifier: github:eamanola/automata-db
-        version: git+https://git@github.com:eamanola/automata-db.git#cedf3d808c83428e6a4ef77cda26a1a8f008dd54
+        version: git+https://git@github.com:eamanola/automata-db.git#1c2e79fa8f0cdb95752dec7b03aa70105a881744
       automata-email-verification:
         specifier: github:eamanola/automata-email-verification
-        version: git+https://git@github.com:eamanola/automata-email-verification.git#19e8f3d2fc5c635e162ccce2d2da97bf24b4c28b
+        version: git+https://git@github.com:eamanola/automata-email-verification.git#2a625449c30b5beb4d062af64d0b9444f639cbc7
       automata-utils:
         specifier: github:eamanola/automata-utils
         version: git+https://git@github.com:eamanola/automata-utils.git#3e24a18bd25af0fb39bb4536bd2f7232e4385a6f
@@ -848,8 +848,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@mongodb-js/saslprep@1.4.6':
-    resolution: {integrity: sha512-y+x3H1xBZd38n10NZF/rEBlvDOOMQ6LKUTHqr8R9VkJ+mmQOYtJFxIlkkK8fZrtOiL6VixbOBWMbZGBdal3Z1g==}
+  '@mongodb-js/saslprep@1.4.11':
+    resolution: {integrity: sha512-o9rAHc0IpIjuPSxRutWpE1F62x7n+4mVS4rCNHkzhIUMQcc18bb6xEq5wd2NdN0WjepIyXIppRshYI2kQDOZVA==}
 
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
@@ -1182,17 +1182,21 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  automata-db@git+https://git@github.com:eamanola/automata-db.git#cedf3d808c83428e6a4ef77cda26a1a8f008dd54:
-    resolution: {commit: cedf3d808c83428e6a4ef77cda26a1a8f008dd54, repo: git@github.com:eamanola/automata-db.git, type: git}
-    version: 0.0.19
+  automata-db@git+https://git@github.com:eamanola/automata-db.git#1c2e79fa8f0cdb95752dec7b03aa70105a881744:
+    resolution: {commit: 1c2e79fa8f0cdb95752dec7b03aa70105a881744, repo: git@github.com:eamanola/automata-db.git, type: git}
+    version: 0.1.1
 
-  automata-email-verification@git+https://git@github.com:eamanola/automata-email-verification.git#19e8f3d2fc5c635e162ccce2d2da97bf24b4c28b:
-    resolution: {commit: 19e8f3d2fc5c635e162ccce2d2da97bf24b4c28b, repo: git@github.com:eamanola/automata-email-verification.git, type: git}
-    version: 0.0.13
+  automata-email-verification@git+https://git@github.com:eamanola/automata-email-verification.git#2a625449c30b5beb4d062af64d0b9444f639cbc7:
+    resolution: {commit: 2a625449c30b5beb4d062af64d0b9444f639cbc7, repo: git@github.com:eamanola/automata-email-verification.git, type: git}
+    version: 0.1.1
 
   automata-utils@git+https://git@github.com:eamanola/automata-utils.git#3e24a18bd25af0fb39bb4536bd2f7232e4385a6f:
     resolution: {commit: 3e24a18bd25af0fb39bb4536bd2f7232e4385a6f, repo: git@github.com:eamanola/automata-utils.git, type: git}
     version: 0.0.17
+
+  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#5632caceabde51451bae400352435b884b64121f:
+    resolution: {commit: 5632caceabde51451bae400352435b884b64121f, repo: git@github.com:eamanola/automata-utils.git, type: git}
+    version: 0.0.18
 
   babel-jest@30.4.1:
     resolution: {integrity: sha512-fATAbM8piYxkiXQp3RBXmZHxZVNJZAVXXfyeyCN2Tida3+qJ8ea9UxhiJ2y4fLO90ZImKt6k9FlcH2+rLkJGhw==}
@@ -2296,8 +2300,8 @@ packages:
     resolution: {integrity: sha512-h0AZ9A7IDVwwHyMxmdMXKy+9oNlF0zFoahHiX3vQ8e3KFcSP3VmsmfvtRSuLPxmyv2vjIDxqty8smTgie/SNRQ==}
     engines: {node: '>=20.19.0'}
 
-  mongodb@7.1.0:
-    resolution: {integrity: sha512-kMfnKunbolQYwCIyrkxNJFB4Ypy91pYqua5NargS/f8ODNSJxT03ZU3n1JqL4mCzbSih8tvmMEMLpKTT7x5gCg==}
+  mongodb@7.2.0:
+    resolution: {integrity: sha512-F/2+BMZtLVhY30ioZp0dAmZ+IRZMBqI+nrv6t5+9/1AIwCa8sMRC3jBf81lpxMhnZgqq8CoUD503Z1oZWq1/sw==}
     engines: {node: '>=20.19.0'}
     peerDependencies:
       '@aws-sdk/credential-providers': ^3.806.0
@@ -2344,8 +2348,8 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  node-abi@3.88.0:
-    resolution: {integrity: sha512-At6b4UqIEVudaqPsXjmUO1r/N5BUr4yhDGs5PkBE8/oG5+TfLPhFechiskFsnT6Ql0VfUXbalUUCbfXxtj7K+w==}
+  node-abi@3.92.0:
+    resolution: {integrity: sha512-KdHvFWZjEKDf0cakgFjebl371GPsISX2oZHcuyKqM7DtogIsHrqKeLTo8wBHxaXRAQlY2PsPlZmfo+9ZCxEREQ==}
     engines: {node: '>=10'}
 
   node-addon-api@8.6.0:
@@ -4020,7 +4024,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.5
 
-  '@mongodb-js/saslprep@1.4.6':
+  '@mongodb-js/saslprep@1.4.11':
     dependencies:
       sparse-bitfield: 3.0.3
 
@@ -4344,11 +4348,11 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  automata-db@git+https://git@github.com:eamanola/automata-db.git#cedf3d808c83428e6a4ef77cda26a1a8f008dd54:
+  automata-db@git+https://git@github.com:eamanola/automata-db.git#1c2e79fa8f0cdb95752dec7b03aa70105a881744:
     dependencies:
       better-sqlite3: 12.9.0
       dotenv: 17.4.2
-      mongodb: 7.1.0
+      mongodb: 7.2.0
       yup: 1.7.1
     transitivePeerDependencies:
       - '@aws-sdk/credential-providers'
@@ -4359,10 +4363,10 @@ snapshots:
       - snappy
       - socks
 
-  automata-email-verification@git+https://git@github.com:eamanola/automata-email-verification.git#19e8f3d2fc5c635e162ccce2d2da97bf24b4c28b:
+  automata-email-verification@git+https://git@github.com:eamanola/automata-email-verification.git#2a625449c30b5beb4d062af64d0b9444f639cbc7:
     dependencies:
-      automata-db: git+https://git@github.com:eamanola/automata-db.git#cedf3d808c83428e6a4ef77cda26a1a8f008dd54
-      automata-utils: git+https://git@github.com:eamanola/automata-utils.git#3e24a18bd25af0fb39bb4536bd2f7232e4385a6f
+      automata-db: git+https://git@github.com:eamanola/automata-db.git#1c2e79fa8f0cdb95752dec7b03aa70105a881744
+      automata-utils: git+https://git@github.com:eamanola/automata-utils.git#5632caceabde51451bae400352435b884b64121f
       dotenv: 17.4.2
       express: 5.2.1
       yup: 1.7.1
@@ -4377,6 +4381,11 @@ snapshots:
       - supports-color
 
   automata-utils@git+https://git@github.com:eamanola/automata-utils.git#3e24a18bd25af0fb39bb4536bd2f7232e4385a6f:
+    dependencies:
+      dotenv: 17.4.2
+      jsonwebtoken: 9.0.3
+
+  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#5632caceabde51451bae400352435b884b64121f:
     dependencies:
       dotenv: 17.4.2
       jsonwebtoken: 9.0.3
@@ -5643,9 +5652,9 @@ snapshots:
       '@types/whatwg-url': 13.0.0
       whatwg-url: 14.2.0
 
-  mongodb@7.1.0:
+  mongodb@7.2.0:
     dependencies:
-      '@mongodb-js/saslprep': 1.4.6
+      '@mongodb-js/saslprep': 1.4.11
       bson: 7.2.0
       mongodb-connection-string-url: 7.0.1
 
@@ -5661,7 +5670,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  node-abi@3.88.0:
+  node-abi@3.92.0:
     dependencies:
       semver: 7.7.4
 
@@ -5766,7 +5775,7 @@ snapshots:
       minimist: 1.2.8
       mkdirp-classic: 0.5.3
       napi-build-utils: 2.0.0
-      node-abi: 3.88.0
+      node-abi: 3.92.0
       pump: 3.0.4
       rc: 1.2.8
       simple-get: 4.0.1

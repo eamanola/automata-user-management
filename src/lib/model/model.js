@@ -8,28 +8,36 @@ const { NODE_ENV } = require('../../config');
 const { passwordHashSchema, userSchema } = require('../validators/user');
 const table = require('./table');
 
-// name to avoid dublicates
-const createUsersTable = async () => createTable(table);
-createUsersTable();
+let client;
 
 module.exports = {
-  findOne: async (where) => findOne(table.name, where),
+  findOne: async (where) => findOne(client, table.name, where),
+  init: async (db) => {
+    if (client) {
+      console.warn('db already set');
+    }
+
+    client = db;
+    await createTable(client, table);
+  },
   insertOne: async (newUser) => {
     const user = { ...newUser, id: randomUUID() };
     await userSchema.validate(user);
 
-    await insertOne(table.name, user);
+    await insertOne(client, table.name, user);
 
     return { id: user.id };
   },
   updatePasswordHash: async (where, passwordHash) => {
     await passwordHashSchema.validate(passwordHash);
 
-    return updateOne(table.name, where, { passwordHash });
+    return updateOne(client, table.name, where, { passwordHash });
   },
 };
 
 if (NODE_ENV === 'test') {
   module.exports.tableName = table.name;
-  module.exports.updateOne = async (where, updates) => updateOne(table.name, where, updates);
+  module.exports.updateOne = async (where, updates) => (
+    updateOne(client, table.name, where, updates)
+  );
 }
