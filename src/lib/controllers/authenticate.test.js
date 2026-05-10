@@ -1,7 +1,6 @@
 const { connectDB, closeDB } = require('automata-db');
-const { router: emailVerificationRouter } = require('automata-email-verification');
 
-const { init: initModel } = require('../model');
+const router = require('../router');
 const {
   countUsers,
   deleteUsers,
@@ -17,9 +16,7 @@ describe('authenticate', () => {
   beforeAll(async () => {
     db = await connectDB(':memory:');
 
-    emailVerificationRouter({ db });
-
-    initModel(db);
+    router({ db });
   });
 
   afterAll(async () => {

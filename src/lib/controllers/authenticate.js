@@ -1,4 +1,3 @@
-const { isVerified } = require('automata-email-verification');
 const { utils, errors } = require('automata-utils');
 
 const { userNotFoundError, invalidPasswordError, emailNotVerifiedError } = require('../errors');
@@ -7,6 +6,7 @@ const { findOne } = require('../model');
 const { getSession } = require('./session');
 const loginSchema = require('../validators/login');
 const comparePassword = require('../utils/compare-password');
+const { isVerified } = require('../../email-verification');
 
 const { logger, token: loginToken } = utils;
 const { encode } = loginToken;

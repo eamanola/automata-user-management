@@ -1,8 +1,7 @@
 const { errors } = require('automata-utils');
 const { connectDB, closeDB } = require('automata-db');
-const { router: emailVerificationRouter } = require('automata-email-verification');
 
-const { init: initModel } = require('../model');
+const router = require('../router');
 const changePassword = require('./change-password');
 const signup = require('./create');
 const login = require('./authenticate');
@@ -18,9 +17,7 @@ describe('change-password', () => {
   beforeAll(async () => {
     db = await connectDB(':memory:');
 
-    emailVerificationRouter({ db });
-
-    initModel(db);
+    router({ db });
   });
 
   afterAll(async () => {

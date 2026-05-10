@@ -1,8 +1,7 @@
 const { connectDB, closeDB } = require('automata-db');
-const { router: emailVerificationRouter } = require('automata-email-verification');
 const { errors } = require('automata-utils');
 
-const { init: initModel } = require('../model');
+const router = require('../router');
 const {
   deleteUsers, findUser, updateUser, getToken,
 } = require('../../../jest/test-helpers');
@@ -15,9 +14,7 @@ describe('authorize', () => {
   beforeAll(async () => {
     db = await connectDB(':memory:');
 
-    emailVerificationRouter({ db });
-
-    initModel(db);
+    router({ db });
   });
 
   afterAll(async () => {

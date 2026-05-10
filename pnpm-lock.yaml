@@ -11,9 +11,6 @@ importers:
       automata-db:
         specifier: github:eamanola/automata-db
         version: git+https://git@github.com:eamanola/automata-db.git#1c2e79fa8f0cdb95752dec7b03aa70105a881744
-      automata-email-verification:
-        specifier: github:eamanola/automata-email-verification
-        version: git+https://git@github.com:eamanola/automata-email-verification.git#2a625449c30b5beb4d062af64d0b9444f639cbc7
       automata-utils:
         specifier: github:eamanola/automata-utils
         version: git+https://git@github.com:eamanola/automata-utils.git#3e24a18bd25af0fb39bb4536bd2f7232e4385a6f
@@ -1186,17 +1183,9 @@ packages:
     resolution: {commit: 1c2e79fa8f0cdb95752dec7b03aa70105a881744, repo: git@github.com:eamanola/automata-db.git, type: git}
     version: 0.1.1
 
-  automata-email-verification@git+https://git@github.com:eamanola/automata-email-verification.git#2a625449c30b5beb4d062af64d0b9444f639cbc7:
-    resolution: {commit: 2a625449c30b5beb4d062af64d0b9444f639cbc7, repo: git@github.com:eamanola/automata-email-verification.git, type: git}
-    version: 0.1.1
-
   automata-utils@git+https://git@github.com:eamanola/automata-utils.git#3e24a18bd25af0fb39bb4536bd2f7232e4385a6f:
     resolution: {commit: 3e24a18bd25af0fb39bb4536bd2f7232e4385a6f, repo: git@github.com:eamanola/automata-utils.git, type: git}
     version: 0.0.17
-
-  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#5632caceabde51451bae400352435b884b64121f:
-    resolution: {commit: 5632caceabde51451bae400352435b884b64121f, repo: git@github.com:eamanola/automata-utils.git, type: git}
-    version: 0.0.18
 
   babel-jest@30.4.1:
     resolution: {integrity: sha512-fATAbM8piYxkiXQp3RBXmZHxZVNJZAVXXfyeyCN2Tida3+qJ8ea9UxhiJ2y4fLO90ZImKt6k9FlcH2+rLkJGhw==}
@@ -4363,29 +4352,7 @@ snapshots:
       - snappy
       - socks
 
-  automata-email-verification@git+https://git@github.com:eamanola/automata-email-verification.git#2a625449c30b5beb4d062af64d0b9444f639cbc7:
-    dependencies:
-      automata-db: git+https://git@github.com:eamanola/automata-db.git#1c2e79fa8f0cdb95752dec7b03aa70105a881744
-      automata-utils: git+https://git@github.com:eamanola/automata-utils.git#5632caceabde51451bae400352435b884b64121f
-      dotenv: 17.4.2
-      express: 5.2.1
-      yup: 1.7.1
-    transitivePeerDependencies:
-      - '@aws-sdk/credential-providers'
-      - '@mongodb-js/zstd'
-      - gcp-metadata
-      - kerberos
-      - mongodb-client-encryption
-      - snappy
-      - socks
-      - supports-color
-
   automata-utils@git+https://git@github.com:eamanola/automata-utils.git#3e24a18bd25af0fb39bb4536bd2f7232e4385a6f:
-    dependencies:
-      dotenv: 17.4.2
-      jsonwebtoken: 9.0.3
-
-  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#5632caceabde51451bae400352435b884b64121f:
     dependencies:
       dotenv: 17.4.2
       jsonwebtoken: 9.0.3

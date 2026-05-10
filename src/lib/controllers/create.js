@@ -1,10 +1,10 @@
-const { setUnverified } = require('automata-email-verification');
 const { utils, errors } = require('automata-utils');
 
 const { emailTakenError } = require('../errors');
 const signupSchema = require('../validators/signup');
 const { findOne, insertOne } = require('../model');
 const hashPassword = require('../utils/hash-password');
+const { setUnverified } = require('../../email-verification');
 
 const { logger } = utils;
 const { createParamError } = errors;

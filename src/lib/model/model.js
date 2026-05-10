@@ -13,9 +13,7 @@ let client;
 module.exports = {
   findOne: async (where) => findOne(client, table.name, where),
   init: async (db) => {
-    if (client) {
-      console.warn('db already set');
-    }
+    if (client) throw new Error('client already exists');
 
     client = db;
     await createTable(client, table);

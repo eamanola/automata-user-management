@@ -2,7 +2,6 @@ const express = require('express');
 const supertest = require('supertest');
 const { errors } = require('automata-utils');
 const { connectDB, closeDB } = require('automata-db');
-const { router: emailVerificationRouter } = require('automata-email-verification');
 
 const { countUsers, deleteUsers, findUser } = require('../../../jest/test-helpers');
 const userErrors = require('../errors');
@@ -14,7 +13,6 @@ let api;
 describe('/signup', () => {
   beforeAll(async () => {
     db = await connectDB(':memory:');
-    emailVerificationRouter({ db });
     const app = express();
     app.use(express.json());
     app.use(router({ db }));
