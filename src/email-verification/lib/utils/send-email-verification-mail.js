@@ -20,7 +20,7 @@ const sendEmailVerificationMail = async ({
 
   if (token) {
     const { address } = await lookup(os.hostname(), { family: 4 });
-    logger.info(`http://${address}:${PORT}/email-verification?token=${token}`);
+    logger.info(`http://${address}:${PORT}/users/email-verification?token=${token}`);
   }
 };
 
