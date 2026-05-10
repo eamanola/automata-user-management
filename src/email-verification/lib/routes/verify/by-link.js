@@ -1,15 +1,19 @@
 const controller = require('../../controllers/verify/by-link');
 
-const verifyByLink = async (req, res, next) => {
-  try {
-    const { token } = req.query;
+const verifyByLink = ({ EMAIL_VERIFICATION_SECRET }) => {
+  const verify = controller({ EMAIL_VERIFICATION_SECRET });
 
-    const redirectTo = await controller(token);
+  return async (req, res, next) => {
+    try {
+      const { token } = req.query;
 
-    res.redirect(301, redirectTo);
-  } catch (err) {
-    next(err);
-  }
+      const redirectTo = await verify(token);
+
+      res.redirect(301, redirectTo);
+    } catch (err) {
+      next(err);
+    }
+  };
 };
 
 module.exports = verifyByLink;

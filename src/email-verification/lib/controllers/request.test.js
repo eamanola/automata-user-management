@@ -3,28 +3,27 @@ const { utils } = require('automata-utils');
 const { createUser, deleteAll, setVerified } = require('../../jest/test-helpers');
 // const userErrors = require('../../users/errors');
 const emailVerificationErrors = require('../errors');
-const { EMAIL_VERIFICATION_SECRET } = require('../../config');
 const sendEmailVerificationMail = require('../utils/send-email-verification-mail');
 const { findOne, init: initModel } = require('../model');
-const request = require('./request');
+const requestController = require('./request');
 
 const { token: emailVerificationToken } = utils;
 const { decode } = emailVerificationToken;
 
 jest.mock('../utils/send-email-verification-mail');
 
-let client;
+const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
+const request = requestController({ EMAIL_VERIFICATION_SECRET });
 
 describe('email verification', () => {
   beforeAll(async () => {
-    client = global.client;
-    await initModel(client);
+    await initModel(global.client);
   });
 
   afterEach(async () => {
     sendEmailVerificationMail.mockClear();
 
-    await deleteAll(client);
+    await deleteAll(global.client);
   });
 
   describe('request', () => {

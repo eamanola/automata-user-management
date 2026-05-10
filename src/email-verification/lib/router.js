@@ -3,20 +3,20 @@ const { middlewares } = require('automata-utils');
 
 const { init: initModel } = require('./model');
 const errors = require('./errors');
-const requestVerification = require('./routes/request');
+const request = require('./routes/request');
 const verifyByLink = require('./routes/verify/by-link');
 const verifyByCode = require('./routes/verify/by-code');
 
 const { requireUser, errorHandler } = middlewares;
 
-const router = ({ db }) => {
+const router = ({ db, EMAIL_VERIFICATION_SECRET }) => {
   initModel(db);
 
   const expressRouter = express.Router();
 
-  expressRouter.get('/', verifyByLink);
+  expressRouter.get('/', verifyByLink({ EMAIL_VERIFICATION_SECRET }));
 
-  expressRouter.post('/', requestVerification);
+  expressRouter.post('/', request({ EMAIL_VERIFICATION_SECRET }));
 
   expressRouter.patch('/', requireUser, verifyByCode);
 

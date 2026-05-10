@@ -10,6 +10,8 @@ const email = 'foo@example.com';
 let api;
 let db;
 
+const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
+
 describe('by-code', () => {
   beforeAll(async () => {
     db = global.client;
@@ -20,7 +22,7 @@ describe('by-code', () => {
 
     app.use((req, res, next) => { req.user = { email }; next(); });
 
-    app.use('/email-verification', router({ db }));
+    app.use('/email-verification', router({ db, EMAIL_VERIFICATION_SECRET }));
 
     api = supertest(app);
   });

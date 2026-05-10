@@ -9,7 +9,7 @@ const { router: emailVerificationRouter } = require('../email-verification');
 
 const { errorHandler, requireUser } = middlewares;
 
-const router = ({ db, SECRET }) => {
+const router = ({ db, SECRET, EMAIL_VERIFICATION_SECRET }) => {
   initModel(db);
 
   const expressRouter = express.Router();
@@ -24,7 +24,10 @@ const router = ({ db, SECRET }) => {
 
   expressRouter.use(errorHandler(userErrors, { defaultTo500: false }));
 
-  expressRouter.use('/email-verification', emailVerificationRouter({ db }));
+  expressRouter.use(
+    '/email-verification',
+    emailVerificationRouter({ db, EMAIL_VERIFICATION_SECRET }),
+  );
 
   return expressRouter;
 };

@@ -4,12 +4,16 @@ const {
   isVerified,
   setUnverified,
 } = require('../../../jest/test-helpers');
-const { request } = require('..');
+const { request: requestController } = require('..');
 const sendEmailVerificationMail = require('../../utils/send-email-verification-mail');
-const verifyByLink = require('./by-link');
+const verifyByLinkController = require('./by-link');
 const { init: initModel } = require('../../model');
 
 jest.mock('../../utils/send-email-verification-mail');
+
+const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
+const verifyByLink = verifyByLinkController({ EMAIL_VERIFICATION_SECRET });
+const request = requestController({ EMAIL_VERIFICATION_SECRET });
 
 describe('email verification', () => {
   beforeAll(async () => {

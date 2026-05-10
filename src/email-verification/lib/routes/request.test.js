@@ -11,6 +11,8 @@ jest.mock('../utils/send-email-verification-mail');
 let api;
 let db;
 
+const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
+
 describe('request verification', () => {
   beforeAll(async () => {
     db = global.client;
@@ -19,7 +21,7 @@ describe('request verification', () => {
 
     app.use(express.json());
 
-    app.use('/email-verification', router({ db }));
+    app.use('/email-verification', router({ db, EMAIL_VERIFICATION_SECRET }));
 
     api = supertest(app);
   });

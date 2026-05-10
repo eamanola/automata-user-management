@@ -4,13 +4,15 @@ const { utils } = require('automata-utils');
 const { emailVerifiedError } = require('../errors');
 const { findOne } = require('../model');
 const sendEmailVerificationMail = require('../utils/send-email-verification-mail');
-const { EMAIL_VERIFICATION_SECRET } = require('../../config');
 const { setUnverified } = require('./set-status');
 
 const { logger, token: emailVerificationToken } = utils;
 const { encode } = emailVerificationToken;
 
-const request = async (email, { byCode = null, byLink = null }) => {
+const request = ({ EMAIL_VERIFICATION_SECRET }) => async (
+  email,
+  { byCode = null, byLink = null },
+) => {
   // if (!user) {
   //   throw userNotFoundError;
   // }
