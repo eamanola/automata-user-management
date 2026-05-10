@@ -3,12 +3,15 @@ const supertest = require('supertest');
 const { errors } = require('automata-utils');
 
 const { deleteUsers, setEmailStatus } = require('../../../jest/test-helpers');
-const { create: signup, authorize: userFromToken } = require('../controllers');
+const { create: signup, authorize } = require('../controllers');
 const userErrors = require('../errors');
 const router = require('../router');
 
 let db;
 let api;
+
+const SECRET = `shhhhh ${Math.random()}`;
+const userFromToken = authorize({ SECRET });
 
 describe('/login', () => {
   beforeAll(async () => {
@@ -16,7 +19,7 @@ describe('/login', () => {
 
     const app = express();
     app.use(express.json());
-    app.use(router({ db }));
+    app.use(router({ db, SECRET }));
     api = supertest(app);
   });
 

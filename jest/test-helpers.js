@@ -1,7 +1,7 @@
 const { deleteAll, count } = require('automata-db');
 
 const { tableName, findOne, updateOne } = require('../src/lib/model');
-const { create: signup, authenticate: login } = require('../src/lib/controllers');
+const { create: signup, authenticate } = require('../src/lib/controllers');
 const { isVerified, setUnverified, setVerified } = require('../src/email-verification');
 
 const countUsers = (db, where) => count(db, tableName, where);
@@ -18,18 +18,22 @@ const setEmailStatus = ({ email, verified }) => (
 
 const isEmailVerified = async (email) => isVerified(email);
 
-const getToken = async ({ email = 'foo@example.com', password = '123' } = {}) => {
-  await signup({ email, password });
-  const { token } = await login({ email, password });
-  return token;
+const tokenCreator = ({ SECRET }) => {
+  const login = authenticate({ SECRET });
+
+  return async ({ email = 'foo@example.com', password = '123' } = {}) => {
+    await signup({ email, password });
+    const { token } = await login({ email, password });
+    return token;
+  };
 };
 
 module.exports = {
   countUsers,
   deleteUsers,
   findUser,
-  getToken,
   isEmailVerified,
   setEmailStatus,
+  tokenCreator,
   updateUser,
 };

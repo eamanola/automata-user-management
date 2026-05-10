@@ -1,16 +1,20 @@
 const { errors } = require('automata-utils');
 
 const router = require('../router');
-const { deleteUsers, getToken } = require('../../../jest/test-helpers');
+const { deleteUsers, tokenCreator } = require('../../../jest/test-helpers');
 const authorization = require('./authorization');
 
 let db;
+
+const SECRET = `shhhhh ${Math.random()}`;
+const getToken = tokenCreator({ SECRET });
+const setUserFromToken = authorization({ SECRET });
 
 describe('authorization', () => {
   beforeAll(async () => {
     db = global.client;
 
-    router({ db });
+    router({ db, SECRET });
   });
 
   afterEach(async () => deleteUsers(db));
@@ -27,7 +31,7 @@ describe('authorization', () => {
 
     expect(req.user).toBeFalsy();
 
-    await authorization(req, res, next);
+    await setUserFromToken(req, res, next);
 
     expect(req.user).toEqual(expect.objectContaining({ email }));
   });
@@ -41,7 +45,7 @@ describe('authorization', () => {
     expect(req.user).toBeFalsy();
     expect(req.get('authorization')).toBeFalsy();
 
-    await authorization(req, res, next);
+    await setUserFromToken(req, res, next);
 
     expect(error).toBeFalsy();
     expect(req.user).toBeFalsy();
@@ -58,7 +62,7 @@ describe('authorization', () => {
     expect(req.user).toBeFalsy();
     expect(req.get('authorization')).toBeTruthy();
 
-    await authorization(req, res, next);
+    await setUserFromToken(req, res, next);
 
     expect(error).toEqual(accessDenied);
     expect(req.user).toBeFalsy();

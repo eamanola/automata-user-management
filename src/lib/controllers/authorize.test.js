@@ -2,18 +2,22 @@ const { errors } = require('automata-utils');
 
 const router = require('../router');
 const {
-  deleteUsers, findUser, updateUser, getToken,
+  deleteUsers, findUser, updateUser, tokenCreator,
 } = require('../../../jest/test-helpers');
 const userErrors = require('../errors');
 const authorize = require('./authorize');
 
 let db;
 
+const SECRET = `shhhhh ${Math.random()}`;
+const getToken = tokenCreator({ SECRET });
+const userFromToken = authorize({ SECRET });
+
 describe('authorize', () => {
   beforeAll(async () => {
     db = global.client;
 
-    router({ db });
+    router({ db, SECRET });
   });
 
   afterEach(async () => deleteUsers(db));
@@ -23,7 +27,7 @@ describe('authorize', () => {
     const password = '123';
 
     const token = await getToken({ email, password });
-    const user = await authorize(token);
+    const user = await userFromToken(token);
 
     expect(user).toEqual(expect.objectContaining({ email }));
   });
@@ -33,7 +37,7 @@ describe('authorize', () => {
     const password = '123';
 
     const token = await getToken({ email, password });
-    const user = await authorize(token);
+    const user = await userFromToken(token);
 
     expect(user).toEqual(expect.objectContaining({ email }));
     const userFromDB = await findUser({ email });
@@ -44,7 +48,7 @@ describe('authorize', () => {
   });
 
   it('should return falsy, if no token', async () => {
-    const user = await authorize(null);
+    const user = await userFromToken(null);
 
     expect(user).toBeFalsy();
   });
@@ -54,7 +58,7 @@ describe('authorize', () => {
 
     try {
       const token = 'fakeToken';
-      await authorize(token);
+      await userFromToken(token);
       expect(false).toBe(true);
     } catch ({ name }) {
       expect(name).toBe(accessDenied.name);
@@ -71,7 +75,7 @@ describe('authorize', () => {
     await updateUser({ email }, { passwordHash: 'a new hash' });
 
     try {
-      await authorize(token);
+      await userFromToken(token);
       expect(false).toBe(true);
     } catch ({ name }) {
       expect(name).toBe(sessionExipred.name);
@@ -88,7 +92,7 @@ describe('authorize', () => {
     await updateUser({ email }, { email: 'bar@example.com' });
 
     try {
-      await authorize(token);
+      await userFromToken(token);
       expect(false).toBe(true);
     } catch ({ name }) {
       expect(name).toBe(sessionExipred.name);

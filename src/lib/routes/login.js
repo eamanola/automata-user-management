@@ -1,18 +1,22 @@
 const { authenticate: controller } = require('../controllers');
 
-const login = async (req, res, next) => {
-  let error = null;
+const authenticate = ({ SECRET }) => {
+  const login = controller({ SECRET });
 
-  const { body } = req;
+  return async (req, res, next) => {
+    let error = null;
 
-  try {
-    const { emailVerified, token } = await controller(body);
-    res.status(200).json({ emailVerified, message: 'OK', token });
-  } catch (err) {
-    error = err;
-  }
+    const { body } = req;
 
-  next(error);
+    try {
+      const { emailVerified, token } = await login(body);
+      res.status(200).json({ emailVerified, message: 'OK', token });
+    } catch (err) {
+      error = err;
+    }
+
+    next(error);
+  };
 };
 
-module.exports = login;
+module.exports = authenticate;

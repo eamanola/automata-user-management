@@ -1,22 +1,26 @@
 const { utils } = require('automata-utils');
 
-const { authorize: userFromToken } = require('../controllers');
+const { authorize: controller } = require('../controllers');
 
 const { extractToken } = utils;
 
-const authorization = async (req, res, next) => {
-  let error = null;
+const authorization = ({ SECRET }) => {
+  const userFromToken = controller({ SECRET });
 
-  try {
-    const token = extractToken(req.get('authorization'));
-    const user = await userFromToken(token);
+  return async (req, res, next) => {
+    let error = null;
 
-    req.user = user;
-  } catch (err) {
-    error = err;
-  }
+    try {
+      const token = extractToken(req.get('authorization'));
+      const user = await userFromToken(token);
 
-  next(error);
+      req.user = user;
+    } catch (err) {
+      error = err;
+    }
+
+    next(error);
+  };
 };
 
 module.exports = authorization;

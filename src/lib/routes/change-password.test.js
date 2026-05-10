@@ -2,7 +2,7 @@ const express = require('express');
 const supertest = require('supertest');
 const { errors } = require('automata-utils');
 
-const { deleteUsers, getToken } = require('../../../jest/test-helpers');
+const { deleteUsers, tokenCreator } = require('../../../jest/test-helpers');
 const { invalidPasswordError } = require('../errors');
 const router = require('../router');
 
@@ -11,13 +11,16 @@ const { accessDenied, paramError } = errors;
 let db;
 let api;
 
+const SECRET = `shhhhh ${Math.random()}`;
+const getToken = tokenCreator({ SECRET });
+
 describe('PUT /password', () => {
   beforeAll(async () => {
     db = global.client;
 
     const app = express();
     app.use(express.json());
-    app.use(router({ db }));
+    app.use(router({ db, SECRET }));
     api = supertest(app);
   });
 

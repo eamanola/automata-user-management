@@ -9,12 +9,14 @@ const router = require('../router');
 let db;
 let api;
 
+const SECRET = `shhhhh ${Math.random()}`;
+
 describe('/signup', () => {
   beforeAll(async () => {
     db = global.client;
     const app = express();
     app.use(express.json());
-    app.use(router({ db }));
+    app.use(router({ db, SECRET }));
     api = supertest(app);
   });
 

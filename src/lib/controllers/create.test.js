@@ -3,16 +3,19 @@ const comparePassword = require('../utils/compare-password');
 const {
   countUsers, deleteUsers, findUser, isEmailVerified,
 } = require('../../../jest/test-helpers');
-const { authenticate: login } = require('.');
+const { authenticate } = require('.');
 const create = require('./create');
 
 let db;
+
+const SECRET = `shhhhh ${Math.random()}`;
+const login = authenticate({ SECRET });
 
 describe('signup', () => {
   beforeAll(async () => {
     db = global.client;
 
-    router({ db });
+    router({ db, SECRET });
   });
   afterEach(async () => deleteUsers(db));
 

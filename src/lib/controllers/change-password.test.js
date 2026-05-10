@@ -3,8 +3,8 @@ const { errors } = require('automata-utils');
 const router = require('../router');
 const changePassword = require('./change-password');
 const signup = require('./create');
-const login = require('./authenticate');
-const userFromToken = require('./authorize');
+const authenticate = require('./authenticate');
+const authorize = require('./authorize');
 const { findUser, countUsers, deleteUsers } = require('../../../jest/test-helpers');
 const { invalidPasswordError } = require('../errors');
 
@@ -12,11 +12,15 @@ const { paramError } = errors;
 
 let db;
 
+const SECRET = `shhhhh ${Math.random()}`;
+const login = authenticate({ SECRET });
+const userFromToken = authorize({ SECRET });
+
 describe('change-password', () => {
   beforeAll(async () => {
     db = global.client;
 
-    router({ db });
+    router({ db, SECRET });
   });
 
   afterEach(async () => deleteUsers(db));

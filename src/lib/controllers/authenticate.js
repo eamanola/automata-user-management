@@ -1,7 +1,6 @@
 const { utils, errors } = require('automata-utils');
 
 const { userNotFoundError, invalidPasswordError, emailNotVerifiedError } = require('../errors');
-const { SECRET } = require('../../config');
 const { findOne } = require('../model');
 const { getSession } = require('./session');
 const loginSchema = require('../validators/login');
@@ -13,7 +12,7 @@ const { encode } = loginToken;
 
 const { createParamError } = errors;
 
-const login = async (
+const login = ({ SECRET }) => async (
   { email, password },
   { REQUIRE_VERIFIED_EMAIL = false } = {},
 ) => {

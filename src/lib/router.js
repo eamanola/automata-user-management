@@ -9,16 +9,16 @@ const { router: emailVerificationRouter } = require('../email-verification');
 
 const { errorHandler, requireUser } = middlewares;
 
-const router = ({ db }) => {
+const router = ({ db, SECRET }) => {
   initModel(db);
 
   const expressRouter = express.Router();
 
   expressRouter.post('/signup', signup);
 
-  expressRouter.post('/login', login);
+  expressRouter.post('/login', login({ SECRET }));
 
-  expressRouter.use(authorization);
+  expressRouter.use(authorization({ SECRET }));
 
   expressRouter.put('/password', requireUser, changePassword);
 

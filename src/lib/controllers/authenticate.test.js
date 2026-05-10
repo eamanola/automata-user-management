@@ -5,16 +5,20 @@ const {
   isEmailVerified,
   setEmailStatus,
 } = require('../../../jest/test-helpers');
-const { create: signup, authorize: userFromToken } = require('.');
+const { create: signup, authorize } = require('.');
 const authenticate = require('./authenticate');
 
 let db;
+
+const SECRET = `shhhhh ${Math.random()}`;
+const login = authenticate({ SECRET });
+const userFromToken = authorize({ SECRET });
 
 describe('authenticate', () => {
   beforeAll(async () => {
     db = global.client;
 
-    router({ db });
+    router({ db, SECRET });
   });
 
   afterEach(async () => deleteUsers(db));
@@ -24,7 +28,7 @@ describe('authenticate', () => {
     const password = '123';
     await signup({ email, password });
 
-    const { token } = await authenticate({ email, password });
+    const { token } = await login({ email, password });
 
     expect(token).toBeTruthy();
     expect(token).not.toEqual(expect.objectContaining({ email }));
@@ -36,12 +40,12 @@ describe('authenticate', () => {
     const password = '123';
     await signup({ email, password });
 
-    const { emailVerified, token } = await authenticate({ email, password });
+    const { emailVerified, token } = await login({ email, password });
     expect(emailVerified).toBe(false);
 
     await userFromToken(token);
     await setEmailStatus({ email, verified: true });
-    const { emailVerified: emailVerifiedUpdated } = await authenticate({ email, password });
+    const { emailVerified: emailVerifiedUpdated } = await login({ email, password });
     expect(emailVerifiedUpdated).toBe(true);
   });
 
@@ -52,7 +56,7 @@ describe('authenticate', () => {
     expect(await countUsers(db, { email })).toBe(0);
 
     try {
-      await authenticate({ email, password });
+      await login({ email, password });
       expect('Should not reach').toBe(true);
     } catch ({ message }) {
       expect(/not found/u.test(message)).toBe(true);
@@ -65,7 +69,7 @@ describe('authenticate', () => {
     await signup({ email, password });
 
     try {
-      await authenticate({ email, password: 'foobar' });
+      await login({ email, password: 'foobar' });
       expect('Should not reach').toBe(true);
     } catch ({ message }) {
       expect(/Login failed/u.test(message)).toBe(true);
@@ -78,10 +82,10 @@ describe('authenticate', () => {
     await signup({ email, password });
 
     expect(await isEmailVerified(email)).toBe(false);
-    await authenticate({ email, password }, { REQUIRE_VERIFIED_EMAIL: false });
+    await login({ email, password }, { REQUIRE_VERIFIED_EMAIL: false });
 
     try {
-      await authenticate({ email, password }, { REQUIRE_VERIFIED_EMAIL: true });
+      await login({ email, password }, { REQUIRE_VERIFIED_EMAIL: true });
       expect('Should not reach').toBe(true);
     } catch ({ message }) {
       expect(/Email Not Verified/u.test(message)).toBe(true);
