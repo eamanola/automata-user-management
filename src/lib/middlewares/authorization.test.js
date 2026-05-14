@@ -4,7 +4,7 @@ const router = require('../router');
 const { deleteUsers, tokenCreator } = require('../../../jest/test-helpers');
 const authorization = require('./authorization');
 
-let db;
+const { db } = global;
 
 const SECRET = `shhhhh ${Math.random()}`;
 const getToken = tokenCreator({ SECRET });
@@ -12,8 +12,6 @@ const setUserFromToken = authorization({ SECRET });
 
 describe('authorization', () => {
   beforeAll(async () => {
-    db = global.client;
-
     router({ db, SECRET });
   });
 

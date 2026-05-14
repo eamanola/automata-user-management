@@ -1,5 +1,3 @@
-const { deleteAll } = require('automata-db');
-
 const { name: tableName } = require('../lib/model/table');
 const { isVerified, setUnverified, setVerified } = require('../lib/controllers/set-status');
 
@@ -10,7 +8,7 @@ const createUser = async ({ email = 'foo@example.com' } = {}) => {
 
 module.exports = {
   createUser,
-  deleteAll: (db) => deleteAll(db, tableName),
+  deleteAll: (db) => db.deleteAll(tableName),
   isVerified,
   setUnverified,
   setVerified,

@@ -15,15 +15,17 @@ jest.mock('../utils/send-email-verification-mail');
 const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
 const request = requestController({ EMAIL_VERIFICATION_SECRET });
 
+const { db } = global;
+
 describe('email verification', () => {
   beforeAll(async () => {
-    await initModel(global.client);
+    await initModel(db);
   });
 
   afterEach(async () => {
     sendEmailVerificationMail.mockClear();
 
-    await deleteAll(global.client);
+    await deleteAll(db);
   });
 
   describe('request', () => {

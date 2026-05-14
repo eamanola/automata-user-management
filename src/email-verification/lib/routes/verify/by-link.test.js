@@ -14,14 +14,13 @@ const router = require('../../router');
 jest.mock('../../utils/send-email-verification-mail');
 
 let api;
-let db;
+const { db } = global;
 
 const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
 const request = requestController({ EMAIL_VERIFICATION_SECRET });
 
 describe('by-link', () => {
   beforeAll(async () => {
-    db = global.client;
     const app = express();
     app.use(express.json());
     app.use('/email-verification', router({ db, EMAIL_VERIFICATION_SECRET }));

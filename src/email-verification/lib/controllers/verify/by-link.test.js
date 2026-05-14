@@ -15,15 +15,17 @@ const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
 const verifyByLink = verifyByLinkController({ EMAIL_VERIFICATION_SECRET });
 const request = requestController({ EMAIL_VERIFICATION_SECRET });
 
+const { db } = global;
+
 describe('email verification', () => {
   beforeAll(async () => {
-    await initModel(global.client);
+    await initModel(db);
   });
 
   afterEach(() => {
     sendEmailVerificationMail.mockClear();
 
-    deleteAll(global.client);
+    deleteAll(db);
   });
 
   describe('verify by link', () => {

@@ -6,14 +6,13 @@ const { countUsers, deleteUsers, findUser } = require('../../../jest/test-helper
 const userErrors = require('../errors');
 const router = require('../router');
 
-let db;
+const { db } = global;
 let api;
 
 const SECRET = `shhhhh ${Math.random()}`;
 
 describe('/signup', () => {
   beforeAll(async () => {
-    db = global.client;
     const app = express();
     app.use(express.json());
     app.use(router({ db, SECRET }));
@@ -29,7 +28,7 @@ describe('/signup', () => {
 
     expect(response.status).toBe(201);
     expect(response.body.message).toBe('OK');
-    expect(await findUser({ email: credentials.email })).toBeTruthy();
+    expect(await findUser(db, { email: credentials.email })).toBeTruthy();
   });
 
   it('should throw emailTakenError, on dublicate', async () => {

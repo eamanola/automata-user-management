@@ -6,12 +6,14 @@ const { findOne, init: initModel } = require('../../model');
 
 jest.mock('../../utils/send-email-verification-mail');
 
+const { db } = global;
+
 describe('email verification', () => {
   beforeAll(async () => {
-    await initModel(global.client);
+    await initModel(db);
   });
 
-  afterEach(() => deleteAll(global.client));
+  afterEach(() => deleteAll(db));
 
   describe('verify by code', () => {
     it('should set email verified', async () => {

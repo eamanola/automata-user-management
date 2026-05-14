@@ -8,7 +8,7 @@ const {
 const { create: signup, authorize } = require('.');
 const authenticate = require('./authenticate');
 
-let db;
+const { db } = global;
 
 const SECRET = `shhhhh ${Math.random()}`;
 const login = authenticate({ SECRET });
@@ -16,8 +16,6 @@ const userFromToken = authorize({ SECRET });
 
 describe('authenticate', () => {
   beforeAll(async () => {
-    db = global.client;
-
     router({ db, SECRET });
   });
 

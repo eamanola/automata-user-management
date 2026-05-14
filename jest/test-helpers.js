@@ -1,16 +1,14 @@
-const { deleteAll, count } = require('automata-db');
-
-const { tableName, findOne, updateOne } = require('../src/lib/model');
+const { name: tableName } = require('../src/lib/model/table');
 const { create: signup, authenticate } = require('../src/lib/controllers');
 const { isVerified, setUnverified, setVerified } = require('../src/email-verification');
 
-const countUsers = (db, where) => count(db, tableName, where);
+const countUsers = (db, where) => db.count(tableName, where);
 
-const findUser = async (where) => findOne(where);
+const findUser = async (db, where) => db.findOne(tableName, where);
 
-const deleteUsers = (db) => deleteAll(db, tableName);
+const deleteUsers = (db) => db.deleteAll(tableName);
 
-const updateUser = async (where, updates) => updateOne(where, updates);
+const updateUser = async (db, where, updates) => db.updateOne(tableName, where, updates);
 
 const setEmailStatus = ({ email, verified }) => (
   verified === true ? setVerified(email) : setUnverified(email)

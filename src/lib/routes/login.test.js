@@ -7,7 +7,7 @@ const { create: signup, authorize } = require('../controllers');
 const userErrors = require('../errors');
 const router = require('../router');
 
-let db;
+const { db } = global;
 let api;
 
 const SECRET = `shhhhh ${Math.random()}`;
@@ -15,8 +15,6 @@ const userFromToken = authorize({ SECRET });
 
 describe('/login', () => {
   beforeAll(async () => {
-    db = global.client;
-
     const app = express();
     app.use(express.json());
     app.use(router({ db, SECRET }));

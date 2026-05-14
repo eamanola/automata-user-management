@@ -8,7 +8,7 @@ const router = require('../router');
 
 const { accessDenied, paramError } = errors;
 
-let db;
+const { db } = global;
 let api;
 
 const SECRET = `shhhhh ${Math.random()}`;
@@ -16,8 +16,6 @@ const getToken = tokenCreator({ SECRET });
 
 describe('PUT /password', () => {
   beforeAll(async () => {
-    db = global.client;
-
     const app = express();
     app.use(express.json());
     app.use(router({ db, SECRET }));

@@ -8,14 +8,12 @@ const router = require('../../router');
 const email = 'foo@example.com';
 
 let api;
-let db;
+const { db } = global;
 
 const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
 
 describe('by-code', () => {
   beforeAll(async () => {
-    db = global.client;
-
     const app = express();
 
     app.use(express.json());

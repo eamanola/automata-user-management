@@ -7,7 +7,7 @@ const {
 const userErrors = require('../errors');
 const authorize = require('./authorize');
 
-let db;
+const { db } = global;
 
 const SECRET = `shhhhh ${Math.random()}`;
 const getToken = tokenCreator({ SECRET });
@@ -15,8 +15,6 @@ const userFromToken = authorize({ SECRET });
 
 describe('authorize', () => {
   beforeAll(async () => {
-    db = global.client;
-
     router({ db, SECRET });
   });
 
@@ -40,7 +38,7 @@ describe('authorize', () => {
     const user = await userFromToken(token);
 
     expect(user).toEqual(expect.objectContaining({ email }));
-    const userFromDB = await findUser({ email });
+    const userFromDB = await findUser(db, { email });
 
     expect(userFromDB).toEqual(expect.objectContaining(user));
     expect(userFromDB.passwordHash).toBeTruthy();
@@ -72,7 +70,7 @@ describe('authorize', () => {
 
     const token = await getToken({ email, password });
 
-    await updateUser({ email }, { passwordHash: 'a new hash' });
+    await updateUser(db, { email }, { passwordHash: 'a new hash' });
 
     try {
       await userFromToken(token);
@@ -89,7 +87,7 @@ describe('authorize', () => {
 
     const token = await getToken({ email, password });
 
-    await updateUser({ email }, { email: 'bar@example.com' });
+    await updateUser(db, { email }, { email: 'bar@example.com' });
 
     try {
       await userFromToken(token);

@@ -6,15 +6,13 @@ const {
 const { authenticate } = require('.');
 const create = require('./create');
 
-let db;
+const { db } = global;
 
 const SECRET = `shhhhh ${Math.random()}`;
 const login = authenticate({ SECRET });
 
 describe('signup', () => {
   beforeAll(async () => {
-    db = global.client;
-
     router({ db, SECRET });
   });
   afterEach(async () => deleteUsers(db));
@@ -60,7 +58,7 @@ describe('signup', () => {
 
     await create({ email, password });
 
-    const user = await findUser({ email });
+    const user = await findUser(db, { email });
 
     expect(user.password).toBe(undefined);
     expect(password).not.toBe(user.passwordHash);

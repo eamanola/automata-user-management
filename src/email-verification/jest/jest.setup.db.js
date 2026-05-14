@@ -1,9 +1,11 @@
-const { connectDB, closeDB } = require('automata-db');
+// const db = require('automata-db')({ DB_ENGINE: 'sqlite' });
 
-beforeAll(async () => {
-  global.client = await connectDB(':memory:');
-});
+// global.db = db;
 
-afterAll(async () => {
-  await closeDB(global.client);
-});
+// beforeAll(async () => {
+//   await global.db.connectDB(':memory:');
+// });
+
+// afterAll(async () => {
+//   await global.db.closeDB();
+// });

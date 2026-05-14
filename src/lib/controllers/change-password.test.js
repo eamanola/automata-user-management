@@ -10,7 +10,7 @@ const { invalidPasswordError } = require('../errors');
 
 const { paramError } = errors;
 
-let db;
+const { db } = global;
 
 const SECRET = `shhhhh ${Math.random()}`;
 const login = authenticate({ SECRET });
@@ -18,8 +18,6 @@ const userFromToken = authorize({ SECRET });
 
 describe('change-password', () => {
   beforeAll(async () => {
-    db = global.client;
-
     router({ db, SECRET });
   });
 
@@ -29,7 +27,8 @@ describe('change-password', () => {
     const email = 'foo@example.com';
     const password = '123';
     await signup({ email, password });
-    const user = await findUser({ email });
+    const user = await findUser(db, { email });
+    expect(user.email).toBe(email);
 
     const newPassword = '234';
     expect(newPassword).not.toBe(password);
@@ -63,7 +62,7 @@ describe('change-password', () => {
 
   it('should have no effect if invalid user', async () => {
     const fakeUser = { email: 'bar@example.con' };
-    expect(await findUser(fakeUser)).toBe(null);
+    expect(await findUser(db, fakeUser)).toBe(null);
 
     await changePassword(fakeUser, '123');
 

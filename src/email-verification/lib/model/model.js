@@ -1,30 +1,22 @@
-const {
-  createTable,
-  findOne,
-  insertOne,
-  updateOne,
-} = require('automata-db');
-
 const table = require('./table');
 const validator = require('./validator');
 
-let client;
-// createTable(table);
-
 const model = {
-  findOne: async (email) => findOne(client, table.name, { email }),
+  db: null,
+  findOne: async (email) => this.db.findOne(table.name, { email }),
   init: async (db) => {
-    if (client) throw new Error('client already exists');
+    if (this.db) throw new Error('client already exists');
 
-    client = db;
-    return createTable(client, table);
+    this.db = db;
+
+    return this.db.createTable(table);
   },
   insertOne: async (email, code) => {
     await validator.validate({ code, email });
 
-    return insertOne(client, table.name, { code, email });
+    return this.db.insertOne(table.name, { code, email });
   },
-  updateOne: async (email, code) => updateOne(client, table.name, { email }, { code }),
+  updateOne: async (email, code) => this.db.updateOne(table.name, { email }, { code }),
 };
 
 module.exports = model;
