@@ -10,10 +10,10 @@ importers:
     dependencies:
       automata-db:
         specifier: github:eamanola/automata-db
-        version: git+https://git@github.com:eamanola/automata-db.git#82bfae93ff78a399b784ed010e032ec15cecbbac
+        version: git+https://git@github.com:eamanola/automata-db.git#39de0012da7cac68ccd6465c73e7d3a599111be0
       automata-utils:
         specifier: github:eamanola/automata-utils
-        version: git+https://git@github.com:eamanola/automata-utils.git#68fb5d110f299ca0516212eabe59af72520e6214
+        version: git+https://git@github.com:eamanola/automata-utils.git#b3a1f614d7c2c2164283a7b5faed18709c8ccb6b
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -813,13 +813,13 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  automata-db@git+https://git@github.com:eamanola/automata-db.git#82bfae93ff78a399b784ed010e032ec15cecbbac:
-    resolution: {commit: 82bfae93ff78a399b784ed010e032ec15cecbbac, repo: git@github.com:eamanola/automata-db.git, type: git}
-    version: 0.1.12
+  automata-db@git+https://git@github.com:eamanola/automata-db.git#39de0012da7cac68ccd6465c73e7d3a599111be0:
+    resolution: {commit: 39de0012da7cac68ccd6465c73e7d3a599111be0, repo: git@github.com:eamanola/automata-db.git, type: git}
+    version: 0.1.15
 
-  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#68fb5d110f299ca0516212eabe59af72520e6214:
-    resolution: {commit: 68fb5d110f299ca0516212eabe59af72520e6214, repo: git@github.com:eamanola/automata-utils.git, type: git}
-    version: 0.0.22
+  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#b3a1f614d7c2c2164283a7b5faed18709c8ccb6b:
+    resolution: {commit: b3a1f614d7c2c2164283a7b5faed18709c8ccb6b, repo: git@github.com:eamanola/automata-utils.git, type: git}
+    version: 0.0.23
 
   babel-jest@30.4.1:
     resolution: {integrity: sha512-fATAbM8piYxkiXQp3RBXmZHxZVNJZAVXXfyeyCN2Tida3+qJ8ea9UxhiJ2y4fLO90ZImKt6k9FlcH2+rLkJGhw==}
@@ -3106,7 +3106,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  automata-db@git+https://git@github.com:eamanola/automata-db.git#82bfae93ff78a399b784ed010e032ec15cecbbac:
+  automata-db@git+https://git@github.com:eamanola/automata-db.git#39de0012da7cac68ccd6465c73e7d3a599111be0:
     dependencies:
       better-sqlite3: 12.10.0
       dotenv: 17.4.2
@@ -3121,7 +3121,7 @@ snapshots:
       - snappy
       - socks
 
-  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#68fb5d110f299ca0516212eabe59af72520e6214:
+  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#b3a1f614d7c2c2164283a7b5faed18709c8ccb6b:
     dependencies:
       dotenv: 17.4.2
       jsonwebtoken: 9.0.3
