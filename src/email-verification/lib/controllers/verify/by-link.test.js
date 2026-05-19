@@ -5,11 +5,8 @@ const {
   setUnverified,
 } = require('../../../jest/test-helpers');
 const { request: requestController } = require('..');
-const sendEmailVerificationMail = require('../../utils/send-email-verification-mail');
 const verifyByLinkController = require('./by-link');
 const { init: initModel } = require('../../model');
-
-jest.mock('../../utils/send-email-verification-mail');
 
 const EMAIL_VERIFICATION_SECRET = `shhhhh ${Math.random()}`;
 const verifyByLink = verifyByLinkController({ EMAIL_VERIFICATION_SECRET });
@@ -22,10 +19,8 @@ describe('email verification', () => {
     await initModel(db);
   });
 
-  afterEach(() => {
-    sendEmailVerificationMail.mockClear();
-
-    deleteAll(db);
+  afterEach(async () => {
+    await deleteAll(db);
   });
 
   describe('verify by link', () => {
@@ -35,8 +30,7 @@ describe('email verification', () => {
       const onFail = 'http://example.com/something-went-wrong';
       const byLink = { onFail, onSuccess };
 
-      await request(email, { byLink });
-      const { token } = sendEmailVerificationMail.mock.calls[0][0];
+      const { token } = await request(email, { byLink });
 
       const redirectUrl = await verifyByLink(token);
       expect(redirectUrl).toBe(byLink.onSuccess);
@@ -50,8 +44,7 @@ describe('email verification', () => {
       const onFail = 'http://example.com/something-went-wrong';
       const byLink = { onFail, onSuccess };
 
-      await request(email, { byLink });
-      const { token } = sendEmailVerificationMail.mock.calls[0][0];
+      const { token } = await request(email, { byLink });
 
       // refresh code
       await setUnverified(email);

@@ -4,8 +4,6 @@ const emailVerificationErrors = require('../../errors');
 const verifyByCode = require('./by-code');
 const { findOne, init: initModel } = require('../../model');
 
-jest.mock('../../utils/send-email-verification-mail');
-
 const { db } = global;
 
 describe('email verification', () => {

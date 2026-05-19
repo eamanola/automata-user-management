@@ -8,10 +8,7 @@ const {
   setUnverified,
 } = require('../../../jest/test-helpers');
 const { request: requestController } = require('../../controllers');
-const sendEmailVerificationMail = require('../../utils/send-email-verification-mail');
 const router = require('../../router');
-
-jest.mock('../../utils/send-email-verification-mail');
 
 let api;
 const { db } = global;
@@ -28,8 +25,6 @@ describe('by-link', () => {
   });
 
   afterEach(async () => {
-    sendEmailVerificationMail.mockClear();
-
     await deleteAll(db);
   });
 
@@ -41,8 +36,7 @@ describe('by-link', () => {
     const onFail = 'http://example.com/something-went-wrong';
     const byLink = { onFail, onSuccess };
 
-    await request(email, { byLink });
-    const { token } = sendEmailVerificationMail.mock.calls[0][0];
+    const { token } = await request(email, { byLink });
 
     await api.get(`/email-verification?token=${token}`);
 
@@ -56,8 +50,7 @@ describe('by-link', () => {
     const onFail = 'http://example.com/something-went-wrong';
     const byLink = { onFail, onSuccess };
 
-    await request(email, { byLink });
-    const { token } = sendEmailVerificationMail.mock.calls[0][0];
+    const { token } = await request(email, { byLink });
 
     await api.get(`/email-verification?token=${token}`)
       .expect('Location', onSuccess);
@@ -70,8 +63,7 @@ describe('by-link', () => {
     const onFail = 'http://example.com/something-went-wrong';
     const byLink = { onFail, onSuccess };
 
-    await request(email, { byLink });
-    const { token } = sendEmailVerificationMail.mock.calls[0][0];
+    const { token } = await request(email, { byLink });
 
     // refresh code
     await setUnverified(email);

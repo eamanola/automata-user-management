@@ -45,6 +45,8 @@ const request = ({ EMAIL_VERIFICATION_SECRET }) => async (
     to: email,
     token,
   });
+
+  return { code, token };
 };
 
 module.exports = request;
