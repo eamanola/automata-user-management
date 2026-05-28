@@ -42,38 +42,49 @@ export default [
 
   // test
   {
-    files: [
-      '**/*.test.js',
-      'jest/**',
-      // email-verification
-      '**/jest/**',
-    ],
+    files: ['**/*.test.js', 'jest/**'],
     languageOptions: {
       globals: {
         ...globals.jest,
+        ...globals.node,
       },
+    },
+    rules: {
+      'import-x/no-extraneous-dependencies': ['error', { devDependencies: true }],
     },
   },
 
   // dev files
   {
+    files: ['eslint.config.mjs', 'esbuild.config.cjs'],
     languageOptions: {
       globals: {
         ...globals.node,
       },
     },
     rules: {
-      'import-x/no-extraneous-dependencies': [
-        'error',
-        {
-          devDependencies: [
-            'eslint.config.mjs',
-            'webpack.config.cjs',
-            '**/*.test.js',
-            'esbuild.config.cjs',
-          ],
-        },
-      ],
+      'import-x/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    },
+  },
+
+  // project specific
+  {
+    languageOptions: {
+      globals: {
+        ...globals.node,
+      },
+    },
+  },
+  {
+    files: ['**/jest/**'],
+    languageOptions: {
+      globals: {
+        ...globals.jest,
+        ...globals.node,
+      },
+    },
+    rules: {
+      'import-x/no-extraneous-dependencies': ['error', { devDependencies: true }],
     },
   },
 ];
