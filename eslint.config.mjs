@@ -23,17 +23,10 @@ export default [
   // general
   {
     rules: {
+      '@stylistic/array-bracket-newline': ['error', 'consistent'],
+      '@stylistic/array-element-newline': ['error', 'consistent'],
       '@stylistic/multiline-ternary': ['error', 'always-multiline'],
-      'no-console': [
-        SHOW_WARNINGS,
-        {
-          allow: [
-            'info',
-            'warn',
-            'error',
-          ],
-        },
-      ],
+      'no-console': [SHOW_WARNINGS, { allow: ['info', 'warn', 'error'] }],
       'prefer-named-capture-group': ['error'],
       'require-unicode-regexp': ['error'],
       'sort-keys': ['warn'],
@@ -75,6 +68,8 @@ export default [
       },
     },
   },
+
+  // email-verification jests
   {
     files: ['**/jest/**'],
     languageOptions: {
