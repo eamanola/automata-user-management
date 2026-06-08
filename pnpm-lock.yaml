@@ -13,7 +13,7 @@ importers:
         version: git+https://git@github.com:eamanola/automata-db.git#458c62fad386d4749230e4b9f8c1b0bffeb658c4(better-sqlite3@12.10.0)
       automata-utils:
         specifier: github:eamanola/automata-utils
-        version: git+https://git@github.com:eamanola/automata-utils.git#7fc92b6be5ad76b3ad0d5ad64d3ce8e2ea409f18
+        version: git+https://git@github.com:eamanola/automata-utils.git#2e6179d246d5145a78232ee03a15a452047c4698
       bcrypt:
         specifier: ^6.0.0
         version: 6.0.0
@@ -842,9 +842,9 @@ packages:
       mongodb-memory-server:
         optional: true
 
-  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#7fc92b6be5ad76b3ad0d5ad64d3ce8e2ea409f18:
-    resolution: {commit: 7fc92b6be5ad76b3ad0d5ad64d3ce8e2ea409f18, repo: git@github.com:eamanola/automata-utils.git, type: git}
-    version: 0.0.29
+  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#2e6179d246d5145a78232ee03a15a452047c4698:
+    resolution: {commit: 2e6179d246d5145a78232ee03a15a452047c4698, repo: git@github.com:eamanola/automata-utils.git, type: git}
+    version: 0.0.30
 
   babel-jest@30.4.1:
     resolution: {integrity: sha512-fATAbM8piYxkiXQp3RBXmZHxZVNJZAVXXfyeyCN2Tida3+qJ8ea9UxhiJ2y4fLO90ZImKt6k9FlcH2+rLkJGhw==}
@@ -3087,7 +3087,7 @@ snapshots:
     optionalDependencies:
       better-sqlite3: 12.10.0
 
-  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#7fc92b6be5ad76b3ad0d5ad64d3ce8e2ea409f18:
+  automata-utils@git+https://git@github.com:eamanola/automata-utils.git#2e6179d246d5145a78232ee03a15a452047c4698:
     dependencies:
       dotenv: 17.4.2
       jsonwebtoken: 9.0.3

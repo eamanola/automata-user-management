@@ -1,12 +1,14 @@
 {
   "name": "automata-user-management",
-  "version": "0.3.19",
+  "version": "0.3.21",
   "description": "user management, authentication, and authorization for automata",
   "type": "commonjs",
-  "main": "dist/index.bundle.js",
   "files": [
     "dist/index.bundle.js"
   ],
+  "exports": {
+    ".": "./dist/index.bundle.js"
+  },
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
