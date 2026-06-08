@@ -1,8 +1,5 @@
-const { utils } = require('automata-utils');
-
+const extractToken = require('./extract-token');
 const { authorize: controller } = require('../controllers');
-
-const { extractToken } = utils;
 
 const authorization = ({ SECRET }) => {
   const userFromToken = controller({ SECRET });
