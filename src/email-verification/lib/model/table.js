@@ -2,10 +2,10 @@ const columns = [
   {
     name: 'email',
     required: true,
-    type: 'string',
+    type: String,
     unique: true,
   },
-  { name: 'code', type: 'number' },
+  { name: 'code', type: Number },
 ];
 
 const indexes = [

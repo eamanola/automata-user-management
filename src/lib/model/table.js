@@ -1,11 +1,11 @@
 const columns = [
   {
-    name: 'email', required: true, type: 'string', unique: true,
+    name: 'email', required: true, type: String, unique: true,
   },
   {
-    name: 'id', required: true, type: 'string', unique: true,
+    name: 'id', required: true, type: String, unique: true,
   },
-  { name: 'passwordHash', required: true, type: 'string' },
+  { name: 'passwordHash', required: true, type: String },
 ];
 
 const indexes = [
