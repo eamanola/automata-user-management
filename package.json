@@ -1,6 +1,6 @@
 {
   "name": "automata-user-management",
-  "version": "0.3.22",
+  "version": "0.3.23",
   "description": "user management, authentication, and authorization for automata",
   "type": "commonjs",
   "files": [
@@ -28,7 +28,7 @@
     "express"
   ],
   "author": "Ehsun Amanolahi",
-  "license": "ISC",
+  "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/eamanola/automata-user-management/issues"
   },
