@@ -1,6 +1,6 @@
 {
   "name": "automata-user-management",
-  "version": "0.3.24",
+  "version": "0.3.25",
   "description": "user management, authentication, and authorization for automata",
   "type": "commonjs",
   "files": [
@@ -54,7 +54,6 @@
     "automata-db": "github:eamanola/automata-db",
     "automata-utils": "github:eamanola/automata-utils",
     "bcrypt": "^6.0.0",
-    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "yup": "^1.7.1"
   }

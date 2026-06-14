@@ -1,5 +1,3 @@
-require('dotenv').config({ quiet: true });
-
 const {
   NODE_ENV,
   PORT = 3000,
