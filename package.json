@@ -1,6 +1,6 @@
 {
   "name": "automata-user-management",
-  "version": "0.3.23",
+  "version": "0.3.24",
   "description": "user management, authentication, and authorization for automata",
   "type": "commonjs",
   "files": [
@@ -21,13 +21,17 @@
     "url": "git+ssh://git@github.com/eamanola/automata-user-management.git"
   },
   "keywords": [
-    "user",
-    "management",
+    "user management",
     "authorization",
     "authentication",
+    "email verification",
     "express"
   ],
-  "author": "Ehsun Amanolahi",
+  "author": {
+    "name": "Ehsun Amanolahi",
+    "email": "ehsun.amanolahi@gmail.com",
+    "url": "https://codeberg.org/eamanola"
+  },
   "license": "AGPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/eamanola/automata-user-management/issues"
