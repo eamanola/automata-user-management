@@ -1,3 +1,5 @@
+Moved to [codeberg](https://codeberg.org/eamanola/automata-user-management)
+
 # automata-user-management
 
 Simple bearer token based express router for user management
